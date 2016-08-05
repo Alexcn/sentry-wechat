@@ -6,16 +6,15 @@ sentry-wechat
 An extension for Sentry which integrates with WeChat. It will forwards
 notifications to an WeChat public account.
 
-:copyright: (c) 2016 by the Arron Jheng.
-:license: 3-clause BSD, see LICENSE for more details.
 """
 
 from setuptools import setup, find_packages
 
 setup(
     name="sentry-wechat",
-    version="1.0.0",
+    version="1.0.1",
     description=u"A Sentry extension which integrates with WeChat",
+    long_description=__doc__,
     url="https://github.com/aaronjheng/sentry-wechat",
     author="Aaron Jheng",
     author_email="wentworth@outlook.com",
