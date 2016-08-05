@@ -8,9 +8,8 @@ from sentry.plugins.bases import NotificationPlugin
 
 TOKEN_ENDPOINT = "https://qyapi.weixin.qq.com/cgi-bin/gettoken"
 NOTIFICATION_ENDPOINT = "https://qyapi.weixin.qq.com/cgi-bin/message/send"
-MESSAGE_TEMPLATE = '''
-{team_name}/{project_name}\t{level}
-{message}
+MESSAGE_TEMPLATE = '''{team_name}/{project_name}\t{level}\n
+{message}\n
 {url}
 '''
 
@@ -92,11 +91,5 @@ class WechatMessage(NotificationPlugin):
         else:
             resp = requests.post(NOTIFICATION_ENDPOINT, params={
                                  "access_token": access_token}, data=json.dumps(message))
-            try:
-                erro_code = resp.json().get("error", None)
-                if erro_code is not None:
-                    info = "Successful" if erro_code == 0 else resp.text
-            except:
-                pass
-
+            info = resp.text
         return info
