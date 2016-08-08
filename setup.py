@@ -11,7 +11,7 @@ notifications to an WeChat public account.
 from setuptools import setup, find_packages
 
 setup(
-    name="sentry-wechat",
+    name="sentry_wechat",
     version="1.0.1",
     description=u"A Sentry extension which integrates with WeChat",
     long_description=__doc__,
