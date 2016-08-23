@@ -40,7 +40,7 @@ class WechatMessage(NotificationPlugin):
     project_conf_form = WechatOptionsForm
 
     def is_configured(self, project):
-        return False
+        return all((self.get_option(k, project) for k in ("agent_id", "access_key", "secret_key")))
 
     def notify_users(self, group, event, fail_silently=False):
         project = event.project
