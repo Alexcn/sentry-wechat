@@ -24,7 +24,8 @@ setup(
         "": ["LICENSE"],
     },
     install_requires=[
-        "sentry>=6.0.0"
+        "sentry>=6.0.0",
+        "pkginfo>=1.4.1,<1.5.0"
     ],
     entry_points={
         "sentry.plugins": [

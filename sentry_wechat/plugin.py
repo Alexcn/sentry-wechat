@@ -3,7 +3,7 @@
 import logging
 import json
 import requests
-import pkg_resources
+import pkginfo
 from django import forms
 from sentry.plugins.bases import NotificationPlugin
 
@@ -15,7 +15,7 @@ MESSAGE_TEMPLATE = '''{team_name}/{project_name}\t{level}\n
 '''
 
 logger = logging.getLogger("sentry.plugins.wechat")
-dist = pkg_resources.get_distribution("sentry_wechat")
+dist = pkginfo.get_metadata("sentry_wechat")
 
 
 class WechatOptionsForm(forms.Form):
@@ -39,8 +39,7 @@ class WechatMessage(NotificationPlugin):
     conf_title = title
     conf_key = "wechat"
     version = dist.version
-    author = "aaron jheng"
-
+    author = dist.author
     project_conf_form = WechatOptionsForm
 
     def is_configured(self, project):
