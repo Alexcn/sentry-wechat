@@ -12,7 +12,7 @@ from setuptools import setup, find_packages
 
 setup(
     name="sentry_wechat",
-    version="1.0.3",
+    version="1.0.4",
     description=u"A Sentry extension which integrates with WeChat",
     long_description=__doc__,
     url="https://github.com/aaronjheng/sentry-wechat",
