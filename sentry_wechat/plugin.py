@@ -9,7 +9,7 @@ from sentry.plugins.bases import NotificationPlugin
 
 TOKEN_ENDPOINT = "https://qyapi.weixin.qq.com/cgi-bin/gettoken"
 NOTIFICATION_ENDPOINT = "https://qyapi.weixin.qq.com/cgi-bin/message/send"
-MESSAGE_TEMPLATE = '''{team_name}/{project_name}\t{level}\n
+MESSAGE_TEMPLATE = '''Sentry {team_name}/{project_name}\t{level}\n
 {message}\n
 {url}
 '''
