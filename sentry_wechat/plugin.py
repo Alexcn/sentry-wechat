@@ -59,9 +59,9 @@ class WechatMessage(NotificationPlugin):
 
         message = {
             "msgtype": "text",
-            "touser": target_users,
-            "toparty": target_parties,
-            "totag": target_tags,
+            "touser": target_users if target_users else "@all",
+            "toparty": target_parties if target_parties else "@all",
+            "totag": target_tags if target_tags else "@all",
             "agentid": agent_id,
             "text": {
                 "content": MESSAGE_TEMPLATE.format(**{
