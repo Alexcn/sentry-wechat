@@ -27,8 +27,7 @@ class WechatOptionsForm(forms.Form):
         help_text="Target users (multiple values should separated with \"|\")",
         required=False)
     target_parties = forms.CharField(
-        help_text=
-        "Target parties (multiple values should separated with \"|\")",
+        help_text="Target parties (multiple values should separated with \"|\")",
         required=False)
     target_tags = forms.CharField(
         help_text="Target tags (multiple values should separated with \"|\")",
