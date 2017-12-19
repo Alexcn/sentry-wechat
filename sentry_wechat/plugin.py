@@ -24,11 +24,15 @@ class WechatOptionsForm(forms.Form):
     access_key = forms.CharField(help_text="Access key")
     secret_key = forms.CharField(help_text="Secret key")
     target_users = forms.CharField(
-        help_text="Target users (multiple values should separated with \"|\")", required=False)
+        help_text="Target users (multiple values should separated with \"|\")",
+        required=False)
     target_parties = forms.CharField(
-        help_text="Target parties (multiple values should separated with \"|\")", required=False)
+        help_text=
+        "Target parties (multiple values should separated with \"|\")",
+        required=False)
     target_tags = forms.CharField(
-        help_text="Target tags (multiple values should separated with \"|\")", required=False)
+        help_text="Target tags (multiple values should separated with \"|\")",
+        required=False)
     is_safe = forms.BooleanField(help_text="Safe or not", required=False)
 
 
@@ -43,7 +47,8 @@ class WechatMessage(NotificationPlugin):
     project_conf_form = WechatOptionsForm
 
     def is_configured(self, project):
-        return all((self.get_option(k, project) for k in ("agent_id", "access_key", "secret_key")))
+        return all((self.get_option(k, project)
+                    for k in ("agent_id", "access_key", "secret_key")))
 
     def notify_users(self, group, event, fail_silently=False):
         project = event.project
@@ -64,21 +69,27 @@ class WechatMessage(NotificationPlugin):
             "totag": target_tags if target_tags else "@all",
             "agentid": agent_id,
             "text": {
-                "content": MESSAGE_TEMPLATE.format(**{
-                    "team_name": team.name,
-                    "project_name": project.name,
-                    "level": event.get_tag('level').capitalize(),
-                    "message": event.get_legacy_message(),
-                    "url": group.get_absolute_url(),
-                }),
+                "content":
+                MESSAGE_TEMPLATE.format(
+                    **{
+                        "team_name": team.name,
+                        "project_name": project.name,
+                        "level": event.get_tag('level').capitalize(),
+                        "message": event.get_legacy_message(),
+                        "url": group.get_absolute_url(),
+                    }),
             },
             "safe": "1" if is_safe else "0"
         }
         return self._push_notification(access_key, secret_key, message)
 
     def _get_token(self, access_key, secret_key):
-        resp = requests.get(TOKEN_ENDPOINT, params={
-                            "corpid": access_key, "corpsecret": secret_key})
+        resp = requests.get(
+            TOKEN_ENDPOINT,
+            params={
+                "corpid": access_key,
+                "corpsecret": secret_key
+            })
         token = None
         try:
             token = resp.json().get("access_token")
@@ -92,7 +103,9 @@ class WechatMessage(NotificationPlugin):
         if access_token is None:
             info = "No valid token"
         else:
-            resp = requests.post(NOTIFICATION_ENDPOINT, params={
-                                 "access_token": access_token}, data=json.dumps(message))
+            resp = requests.post(
+                NOTIFICATION_ENDPOINT,
+                params={"access_token": access_token},
+                data=json.dumps(message))
             info = resp.text
         return info

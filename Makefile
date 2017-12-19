@@ -9,3 +9,6 @@ clean:
 
 dist: clean
 	python setup.py sdist bdist_wheel
+
+format: 
+	yapf --recursive --in-place --parallel sentry_wechat/
