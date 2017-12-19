@@ -12,3 +12,11 @@ dist: clean
 
 format: 
 	yapf --recursive --in-place --parallel sentry_wechat/
+
+lint:
+	pylint --reports y sentry_wechat/
+
+.PHONY: clean \
+		dist \
+		format \
+		lint
